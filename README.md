@@ -79,7 +79,7 @@ We are now at the last part of step by step guide on how to simulate STM32 proje
 ![image](https://user-images.githubusercontent.com/36288975/233856847-32bea88a-565f-4e01-9c7e-4f7ed546ddf6.png)
 
 14. Double click on the the MCU part to open settings. Next to the Program File option, give full path to the Hex file generated using STM32Cube IDE. Then set the external crystal frequency to 8M (i.e. 8 MHz). Click OK to save the changes.
-https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
+
 
 15. click on debug and simulate using simulation as shown below 
 
@@ -89,14 +89,37 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
   
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
 
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
 
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  while (1)
+  {
+  }
+}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin==GPIO_PIN_0){
+		HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
+	}
+}
+```
 
 ## Output screen shots of proteus  :
+
+![Screenshot 2025-05-02 144349](https://github.com/user-attachments/assets/f60c8736-0141-4e09-a05d-edaf16c5c931)
+![Screenshot 2025-05-02 144104](https://github.com/user-attachments/assets/b2763fee-a5ba-40de-acc9-f9c4f10c02fe)
+
+## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
  
- 
- ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- 
- 
+![image](https://github.com/user-attachments/assets/2e72f726-e7ba-41c4-a6a3-d83fecda9328)
+
 ## Result :
 Interfacing a push button and interrupt genrateion is simulated using proteus 
